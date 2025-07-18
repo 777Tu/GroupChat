@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Group chat</title>
+  <link rel="stylesheet" href="/static/chat.css">
+
+</head>
+<body>
+  <!--HEADING-->
+  <header class="top-nav">
+    <img src="https://i.postimg.cc/RFSFQDzT/partners.png" alt="profile" class="profile-pic">
+    <h1>group chat </h1>
+        <div class="logout">
+      <a href="/logout"><img src="https://i.postimg.cc/DZC2QQFJ/logout-2.png" class="logout-icon"></a>
+    </div>
+  </header>
+  <!--Welcome-->
+  
+  
+    <div class="welcome">
+    <h3>welcome {{user_name}}</h3>
+    <img src="https://i.postimg.cc/0j89qMNd/profile.png" alt="profile" class="profile-pic-wel">
+  </div>
+  
+  <!--MESSAGE-->
+<!--MESSAGE-->
+<div class="chat-messages">
+  {% for message in messages %}
+  <div class="message {{ 'sent' if message.username == user_name else 'received' }}">
+  <div class="chat-pic-name">
+   <img src="https://i.postimg.cc/3wdr4QbK/profile-3.png" class="chat-pic"> <p class="chat-name">{{message.username}}</p>
+   {% if message.username == user_name %}
+   <a href="/delete/{{message.id}}" class="delete-btn">delete</a>
+   {% endif%}
+   </div>
+    <p>{{message.text}}</p>
+    <p style='float: right; color: #916fbd;'>{{message.time}}</p>
+  </div>
+  {% endfor %}
+</div>
+
+  <!--CHAT PLACE-->
+  
+  <div class="text-message">
+    <form method='POST'>
+      <input type="text" name="text_message" placeholder="Type messages here..." required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+</body>
+</html>
